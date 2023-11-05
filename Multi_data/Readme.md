@@ -1,4 +1,4 @@
-Follow the following steps:
+Follow the below steps:
 
 ## Mysql
 
