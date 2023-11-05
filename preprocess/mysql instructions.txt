@@ -1,0 +1,871 @@
+mysql -uroot -p
+l7357286
+
+use mimiciiiv14;
+show tables;
+select SUBJECT_ID, ITEMID, VALUE, CHARTTIME from CHARTEVENTS limit 5;
+
+select * from D_ITEMS limit 5;
++--------+--------+----------------------+--------------+----------+-------------+----------+----------+------------+-----------+
+| ROW_ID | ITEMID | LABEL                | ABBREVIATION | DBSOURCE | LINKSTO     | CATEGORY | UNITNAME | PARAM_TYPE | CONCEPTID |
++--------+--------+----------------------+--------------+----------+-------------+----------+----------+------------+-----------+
+|      1 |   1435 | Sustained Nystamus   | NULL         | carevue  | chartevents | NULL     | NULL     | NULL       |      NULL |
+|      2 |   1436 | Tactile Disturbances | NULL         | carevue  | chartevents | NULL     | NULL     | NULL       |      NULL |
+|      3 |   1437 | Tremor               | NULL         | carevue  | chartevents | NULL     | NULL     | NULL       |      NULL |
+|      4 |   1438 | Ulnar Pulse [Right]  | NULL         | carevue  | chartevents | NULL     | NULL     | NULL       |      NULL |
+|      5 |   1439 | Visual Disturbances  | NULL         | carevue  | chartevents | NULL     | NULL     | NULL       |      NULL |
++--------+--------+----------------------+--------------+----------+-------------+----------+----------+------------+-----------+
+
+select ITEMID, LABEL from D_ITEMS limit 10;
+
+select ITEMID, LABEL from D_ITEMS where LABEL like "%blood pressure%";
++--------+------------------------------------------+
+| ITEMID | LABEL                                    |
++--------+------------------------------------------+
+| 220050 | Arterial Blood Pressure systolic         |
+| 220051 | Arterial Blood Pressure diastolic        |
+| 220052 | Arterial Blood Pressure mean             |
+| 220056 | Arterial Blood Pressure Alarm - Low      |
+| 220058 | Arterial Blood Pressure Alarm - High     |
+| 220179 | Non Invasive Blood Pressure systolic     |
+| 220180 | Non Invasive Blood Pressure diastolic    |
+| 220181 | Non Invasive Blood Pressure mean         |
+| 223752 | Non-Invasive Blood Pressure Alarm - Low  |
+| 223751 | Non-Invasive Blood Pressure Alarm - High |
+| 224167 | Manual Blood Pressure Systolic Left      |
+| 224643 | Manual Blood Pressure Diastolic Left     |
+| 227242 | Manual Blood Pressure Diastolic Right    |
+| 227243 | Manual Blood Pressure Systolic Right     |
+| 227537 | ART Blood Pressure Alarm - High          |
+| 227538 | ART Blood Pressure Alarm - Low           |
+| 227539 | ART Blood Pressure Alarm Source          |
++--------+------------------------------------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%cholesterol%";
++--------+---------------------+
+| ITEMID | LABEL               |
++--------+---------------------+
+|    789 | Cholesterol (<200)  |
+|   3748 | Cholesterol (0-199) |
+|   1524 | Cholesterol         |
+| 220603 | Cholesterol         |
++--------+---------------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%sleep%";
++--------+-------+
+| ITEMID | LABEL |
++--------+-------+
+|   3618 | Sleep |
++--------+-------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%visit%";
++--------+----------------------+
+| ITEMID | LABEL                |
++--------+----------------------+
+|   3378 | Consent for visitors |
+|   3385 | Dad in to visit      |
+|   3448 | Grandparents Visit   |
+|   3512 | Mom in to Visit      |
+|   5956 | Cardiologist visit   |
+|   3566 | Parents in to visit  |
+| 228327 | PC Reason for visit  |
+| 228331 | PC Time of visit     |
++--------+----------------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%walking%";
++--------+----------------+
+| ITEMID | LABEL          |
++--------+----------------+
+|   7439 | walking hr     |
+|   7440 | walking o2 sat |
++--------+----------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%sex%";
++--------+-----------------------------------------------------------------+
+| ITEMID | LABEL                                                           |
++--------+-----------------------------------------------------------------+
+| 225076 | Emotional / physical / sexual harm by partner or close relation |
+| 226180 | Sexuality / reproductive problems                               |
++--------+-----------------------------------------------------------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%Alcohol%";
++--------+----------------------+
+| ITEMID | LABEL                |
++--------+----------------------+
+|   3106 | alcohol gtt          |
+|   1364 | ALCOHOL BATH         |
+|   1820 | alcohol bath         |
+|   2655 | ALCOHOL 10%DRIP G/HR |
+|   2658 | ALCOHOL              |
+|   2661 | ALCOHOL 5% DRIP G/HR |
+|   2796 | Alcohol Gm/hour      |
+|   2804 | 10% alcohol/ cc/hr   |
+|   2806 | ALCOHOL GTT ML/HR    |
+|   2876 | 10% ALCOHOL CC/HR    |
+|  30175 | Alcohol 10%          |
+|  42564 | ALCOHOL 10%DRIP G/HR |
+|  42576 | 10% ALCOHOL DRIP     |
+|  42697 | Alcohol Gm/hour      |
+|  42709 | ALCOHOL GTT ML/HR    |
+|  42777 | 10% ALCOHOL IN 5% D5 |
+|  42888 | D5W 10%ALCOHOL       |
+|  42932 | 10% alcohol          |
+|  42998 | alcohol gtt          |
+|  42561 | ALCOHOL              |
+|  42577 | ALCOHOL 5% DRIP G/HR |
+|  42722 | ALCOHOL 10% DRIP     |
++--------+----------------------+
+
+mysql> select ITEMID, LABEL from D_ITEMS where LABEL like "%smoking%";
++--------+--------------------------------------------------------------+
+| ITEMID | LABEL                                                        |
++--------+--------------------------------------------------------------+
+| 227688 | Smoking Cessation Info Offered through BIDMC Inpatient Guide |
++--------+--------------------------------------------------------------+
+
+mysql> select ITEMID, LABEL, LINKSTO from D_ITEMS where LABEL like "%health%";
++--------+-------------------------------------------+-------------+
+| ITEMID | LABEL                                     | LINKSTO     |
++--------+-------------------------------------------+-------------+
+|   1703 | Health Care Proxy                         | chartevents |
+| 223760 | Health Care Proxy                         | chartevents |
+| 225067 | Is the spokesperson the Health Care Proxy | chartevents |
+| 226746 | ApacheII chronic health                   | chartevents |
+| 226747 | APACHEII-Chronic health points            | chartevents |
+| 227003 | Chronic health on admission               | chartevents |
++--------+-------------------------------------------+-------------+
+
+mysql> select ITEMID, LABEL, LINKSTO from D_ITEMS where LABEL like "%heart%";
++--------+------------------------------------------------+--------------------+
+| ITEMID | LABEL                                          | LINKSTO            |
++--------+------------------------------------------------+--------------------+
+|    211 | Heart Rate                                     | chartevents        |
+|    212 | Heart Rhythm                                   | chartevents        |
+|    213 | Heart Sounds                                   | chartevents        |
+|   3494 | Lowest Heart Rate                              | chartevents        |
+|   5972 | fetal heartrate                                | chartevents        |
+|   2781 | fetal heart sound                              | chartevents        |
+| 220045 | Heart Rate                                     | chartevents        |
+| 220046 | Heart rate Alarm - High                        | chartevents        |
+| 220047 | Heart Rate Alarm - Low                         | chartevents        |
+| 220048 | Heart Rhythm                                   | chartevents        |
+| 224389 | Heart Sounds                                   | chartevents        |
+| 228186 | Access Site Observed (Tandem Heart)            | chartevents        |
+| 228189 | CO-Tandem Heart Flow                           | chartevents        |
+| 228194 | Peripheral Pulses (Tandem Heart)               | chartevents        |
+| 228196 | Return Site Observed (Tandem Heart)            | chartevents        |
+| 228198 | Tandem Heart Flow                              | chartevents        |
+| 228199 | Type (Tandem Heart)                            | chartevents        |
+| 228201 | Tandem Heart Access Line                       | procedureevents_mv |
+| 228202 | Tandem Heart Return Line                       | procedureevents_mv |
+| 228203 | Tandem Heart Access Line Cannula Site          | chartevents        |
+| 228204 | Tandem Heart Access Line Catheter Length       | chartevents        |
+| 228206 | Tandem Heart Access Line Discontinued          | chartevents        |
+| 228207 | Tandem Heart Access Line Dressing Change       | datetimeevents     |
+| 228208 | Tandem Heart Access Line Dressing Occlusive    | chartevents        |
+| 228209 | Tandem Heart Access Line Insertion Date        | datetimeevents     |
+| 228210 | Tandem Heart Access Line Position              | chartevents        |
+| 228211 | Tandem Heart Access Line Postion Confirmed     | chartevents        |
+| 228212 | Tandem Heart Access Line Pump Housing Checked  | chartevents        |
+| 228213 | Tandem Heart Access Line Repositioned          | chartevents        |
+| 228214 | Tandem Heart Access Line Site Appear           | chartevents        |
+| 228215 | Tandem Heart Access Line Tubing Change         | datetimeevents     |
+| 228216 | Tandem Heart Access Line Type                  | chartevents        |
+| 228217 | Tandem Heart Return Cannula Discontinued       | chartevents        |
+| 228218 | Tandem Heart Return Cannula Dressing Change    | datetimeevents     |
+| 228219 | Tandem Heart Return Cannula Dressing Occlusive | chartevents        |
+| 228221 | Tandem Heart Return Cannula Insertion Date     | datetimeevents     |
+| 228222 | Tandem Heart Return Cannula Migration          | chartevents        |
+| 228223 | Tandem Heart Return Cannula Position           | chartevents        |
+| 228224 | Tandem Heart Return Cannula Repositioned       | chartevents        |
+| 228225 | Tandem Heart Return Cannula Site               | chartevents        |
+| 228226 | Tandem Heart Return Cannula Site Appear        | chartevents        |
+| 228227 | Tandem Heart Return Cannula Size               | chartevents        |
++--------+------------------------------------------------+--------------------+
+
+mysql> select ITEMID, LABEL, LINKSTO from D_ITEMS where LABEL like "%blood%";
++--------+------------------------------------------+--------------------+
+| ITEMID | LABEL                                    | LINKSTO            |
++--------+------------------------------------------+--------------------+
+|     79 | Blood Flow ml/min                        | chartevents        |
+|    783 | Blood Products                           | chartevents        |
+|   3333 | Blood Cultures                           | chartevents        |
+|   3334 | Blood Out                                | chartevents        |
+|    938 | blood cultures                           | chartevents        |
+|    942 | BLOOD CULTURES                           | chartevents        |
+|    987 | Clot to Blood Bank                       | chartevents        |
+|   5826 | CBC and blood cx                         | chartevents        |
+|   5983 | Fungal Blood cx                          | chartevents        |
+|   3744 | Blood Glucose                            | chartevents        |
+|   3745 | BloodGlucose                             | chartevents        |
+|   3799 | Red Blood C(3.6-6.2)                     | chartevents        |
+|   3834 | WhiteBloodC 4.0-11.0                     | chartevents        |
+|   2341 | CLOT IN BLOODBANK                        | chartevents        |
+|   2450 | CLOT IN BLOOD BANK                       | chartevents        |
+|  30002 | Whole Blood                              | inputevents_cv     |
+|  30094 | Other Blood Products                     | inputevents_cv     |
+|  30106 | OR Autologous Blood                      | inputevents_cv     |
+|  41776 | IR blood products                        | inputevents_cv     |
+|  43176 | Blood Out Lab                            | outputevents       |
+|  43538 | blood removed...                         | outputevents       |
+|  42527 | INR BLOOD PRODUCTS                       | inputevents_cv     |
+|  43161 | Total Blood Out                          | outputevents       |
+|  44560 | blood                                    | inputevents_cv     |
+|  44905 | ed blood products                        | inputevents_cv     |
+|  43582 | Total blood out                          | outputevents       |
+|  43606 | blood out                                | outputevents       |
+|  43762 | Blood out                                | outputevents       |
+|  44169 | Blood from oral sx                       | inputevents_cv     |
+|  44187 | Blood emesis                             | outputevents       |
+|  45617 | blood from mouth                         | outputevents       |
+|  43901 | blood loss                               | inputevents_cv     |
+|  70007 | BLOOD BAG FLUID                          | microbiologyevents |
+|  70011 | BLOOD CULTURE ( MYCO/F LYTIC BOTTLE)     | microbiologyevents |
+|  70012 | BLOOD CULTURE                            | microbiologyevents |
+|  70013 | FLUID RECEIVED IN BLOOD CULTURE BOTTLES  | microbiologyevents |
+|  70014 | BLOOD CULTURE - NEONATE                  | microbiologyevents |
+|  70015 | BLOOD                                    | microbiologyevents |
+|  70016 | BLOOD CULTURE (POST-MORTEM)              | microbiologyevents |
+|  70017 | SEROLOGY/BLOOD                           | microbiologyevents |
+|  70032 | Blood (EBV)                              | microbiologyevents |
+|  70049 | NEOPLASTIC BLOOD                         | microbiologyevents |
+|  70052 | PERIPHERAL BLOOD LYMPHOCYTES             | microbiologyevents |
+|  70060 | Stem Cell - Blood Culture                | microbiologyevents |
+|  70087 | Blood (CMV AB)                           | microbiologyevents |
+|  70088 | Blood (EBV)                              | microbiologyevents |
+|  70089 | Blood (Malaria)                          | microbiologyevents |
+|  70093 | Blood (Toxo)                             | microbiologyevents |
+| 220050 | Arterial Blood Pressure systolic         | chartevents        |
+| 220051 | Arterial Blood Pressure diastolic        | chartevents        |
+| 220052 | Arterial Blood Pressure mean             | chartevents        |
+| 220056 | Arterial Blood Pressure Alarm - Low      | chartevents        |
+| 220058 | Arterial Blood Pressure Alarm - High     | chartevents        |
+| 220179 | Non Invasive Blood Pressure systolic     | chartevents        |
+| 220180 | Non Invasive Blood Pressure diastolic    | chartevents        |
+| 220181 | Non Invasive Blood Pressure mean         | chartevents        |
+| 223752 | Non-Invasive Blood Pressure Alarm - Low  | chartevents        |
+| 221013 | Whole Blood                              | inputevents_mv     |
+| 223751 | Non-Invasive Blood Pressure Alarm - High | chartevents        |
+| 224167 | Manual Blood Pressure Systolic Left      | chartevents        |
+| 224144 | Blood Flow (ml/min)                      | chartevents        |
+| 224643 | Manual Blood Pressure Diastolic Left     | chartevents        |
+| 225168 | Packed Red Blood Cells                   | inputevents_mv     |
+| 225401 | Blood Cultured                           | procedureevents_mv |
+| 226482 | Blood Clot Outdates                      | datetimeevents     |
+| 226534 | Sodium (whole blood)                     | chartevents        |
+| 226535 | ZPotassium (whole blood)                 | chartevents        |
+| 226536 | Chloride (whole blood)                   | chartevents        |
+| 226537 | Glucose (whole blood)                    | chartevents        |
+| 226540 | Hematocrit (whole blood - calc)          | chartevents        |
+| 226329 | Blood Temperature CCO (C)                | chartevents        |
+| 226370 | OR Autologous Blood Intake               | inputevents_mv     |
+| 226473 | Blood Transfusion Consent                | chartevents        |
+| 227242 | Manual Blood Pressure Diastolic Right    | chartevents        |
+| 227243 | Manual Blood Pressure Systolic Right     | chartevents        |
+| 227537 | ART Blood Pressure Alarm - High          | chartevents        |
+| 227538 | ART Blood Pressure Alarm - Low           | chartevents        |
+| 227539 | ART Blood Pressure Alarm Source          | chartevents        |
+| 227464 | Potassium (whole blood)                  | chartevents        |
+| 228188 | Change in Blood Color                    | chartevents        |
+| 228386 | Chloride (whole blood) (soft)            | chartevents        |
+| 228388 | Glucose (whole blood) (soft)             | chartevents        |
+| 228390 | Sodium (whole blood) (soft)              | chartevents        |
++--------+------------------------------------------+--------------------+
+
+mysql> select ITEMID, LABEL, LINKSTO from D_ITEMS where LABEL like "%head%";
++--------+--------------------------+-------------+
+| ITEMID | LABEL                    | LINKSTO     |
++--------+--------------------------+-------------+
+|   3451 | Head Circ       (cm)     | chartevents |
+|   3452 | Head US                  | chartevents |
+|   3453 | Head of Bed              | chartevents |
+|   1428 | Headache                 | chartevents |
+|   4666 | head                     | chartevents |
+|   4672 | Head Circ.               | chartevents |
+|   5628 | head circ.               | chartevents |
+|   4268 | left head dsg.           | chartevents |
+|   1929 | 8.headach,fullness       | chartevents |
+|   1940 | 9. H/A Head fullness     | chartevents |
+|   6632 | head circumference       | chartevents |
+|   6650 | DSD on head              | chartevents |
+| 223820 | Headache                 | chartevents |
+| 224080 | Head of Bed              | chartevents |
+| 224765 | Neuro Drain Head of Bed  | chartevents |
+| 226170 | Head of Bead Measurement | chartevents |
++--------+--------------------------+-------------+
+
+mysql> select ITEMID, LABEL, LINKSTO from D_ITEMS where LABEL like "%Temperature%";
++--------+------------------------------------------+-------------+
+| ITEMID | LABEL                                    | LINKSTO     |
++--------+------------------------------------------+-------------+
+|    591 | RLE [Temperature]                        | chartevents |
+|    597 | RUE [Temperature]                        | chartevents |
+|    645 | Skin [Temperature]                       | chartevents |
+|    676 | Temperature C                            | chartevents |
+|    677 | Temperature C (calc)                     | chartevents |
+|    678 | Temperature F                            | chartevents |
+|    679 | Temperature F (calc)                     | chartevents |
+|   8537 | Temp/Iso/Warmer [Temperature, degrees C] | chartevents |
+| 223761 | Temperature Fahrenheit                   | chartevents |
+| 223762 | Temperature Celsius                      | chartevents |
+| 224027 | Skin Temperature                         | chartevents |
+| 224674 | Changes in Temperature                   | chartevents |
+| 224642 | Temperature Site                         | chartevents |
+| 226329 | Blood Temperature CCO (C)                | chartevents |
+| 227054 | TemperatureF_ApacheIV                    | chartevents |
+| 228242 | Pt. Temperature (BG) (SOFT)              | chartevents |
++--------+------------------------------------------+-------------+
+
+
+select table_schema, sum(data_length+index_length)/1024/1024 as total_mb, sum(data_length)/1024/1024 as data_mb, sum(index_length)/1024/1024 as index_mb, \
+count(*) as tables, curdate() as today from information_schema.tables group by table_schema order by 2 desc;
+
+
+SELECT ITEMID, COUNT(*) FROM CHARTEVENTS GROUP BY ITEMID INTO OUTFILE '/home/kelon/code/CVD/mimicdata/item_number.csv';
+
+select SUBJECT_ID, ITEMID, VALUE, CHARTTIME from CHARTEVENTS where ITEMID=3451 limit 50;
+
+
+select SUBJECT_ID, HADM_ID, ITEMID, VALUE, VALUEUOM, CHARTTIME from CHARTEVENTS where ITEMID IN (220050, 220051, 220052, 220179, 220180, 220191, 789, 3748, 1524, 220603, 3385,3512, 79,224144, 3799, 3834, 211, 22004, 8537) INTO OUTFILE '/home/kelon/code/CVD/mimicdata/biomarks.csv';
+
+SELECT SUBJECT_ID, HADM_ID, ICD9_CODE FROM DIAGNOSES_ICD WHERE ICD9_CODE IN (4119,4129,4139,4140,4141,4148,4149,4241,4260,4275,4280,4281,4292,4320,4331,4339,4349,4359,4370,4371,4372,4373) INTO OUTFILE '/home/kelon/code/CVD/mimicdata/icd-9.csv';
+
+select SUBJECT_ID, HADM_ID, CHARTDATE, CHARTTIME, STORETIME, TEXT from NOTEEVENTS INTO OUTFILE '/home/kelon/code/CVD/mimicdata/noteevents.csv';
+
+将PATIENTS表中的GENDER，DOB加入到ADMISSIONS表中
+SELECT ADMISSIONS.SUBJECT_ID, ADMISSIONS.HADM_ID, ADMISSIONS.ADMITTIME, ADMISSIONS.DISCHTIME, 
+ADMISSIONS.HOSPITAL_EXPIRE_FLAG, ADMISSIONS.ETHNICITY, ADMISSIONS.MARITAL_STATUS, PATIENTS.GENDER, PATIENTS.DOB FROM ADMISSIONS
+LEFT JOIN PATIENTS ON ADMISSIONS.SUBJECT_ID = PATIENTS.SUBJECT_ID
+ORDER BY ADMISSIONS.HADM_ID
+INTO OUTFILE '/home/kelon/code/CVD/mimicdata/admissions.csv';
+
+creatinine:[791, 1525, 220615]
+disastolic blood pressure:[224643, 225310, 220180, 8555, 220051, 8368, 8441, 8440]
+glucose:[220621, 225664, 811, 807, 226537, 1529]
+heart rate:[211, 20045]
+hemoglobin:[220228, 814]
+mean blood pressure:[456, 220181, 224, 225312, 220052, 52, 6702, 224322]
+oxygen saturation:[646, 834, 220177, 220227]
+platelets:[828, 227457]
+red blood cell count:[833]
+respiratory rate:[224422, 618, 220210, 224689, 614, 651, 224690, 615]
+systemic vascular resistance:[626]
+systolic blood pressure:[442, 227243, 224167, 220179, 225309, 6701, 220050, 51, 455]
+temperature:[223761, 671, 676, 679, 678, 223762]
+white blood cell count:[861, 1542, 220546, 1127]
+cholesterol:[789, 3748, 1524, 220603]
+visit:[3385, 3512]
+Blood Flow:[79, 224144]
+red blood cell:[3799]
+white blood cell:[3834]
+
+# step 1:  Get all data contain selected features
+select SUBJECT_ID, HADM_ID, ITEMID, VALUE, VALUEUOM, CHARTTIME from CHARTEVENTS where ITEMID IN 
+(791, 1525, 220615, 224643, 225310, 220180, 8555, 220051, 8368, 8441, 8440, 220621, 225664, 811, 807, 226537, 1529, 
+211, 20045, 220228, 814, 456, 220181, 224, 225312, 220052, 52, 6702, 224322, 646, 834, 220177, 220227, 828, 227457, 833,
+224422, 618, 220210, 224689, 614, 651, 224690, 615, 626, 442, 227243, 224167, 220179, 225309, 6701, 220050, 51, 455,
+223761, 671, 676, 679, 678, 223762, 861, 1542, 220546, 1127, 789, 3748, 1524, 220603, 3385, 3512, 79, 224144,3799,3843) 
+INTO OUTFILE '/home/kelon/code/CVD/mimicdata/biomarks.csv';
+
+# 筛选出出现频率较高的特征
+SELECT ITEMID, COUNT(DISTINCT HADM_ID) AS unique_hadm_count
+FROM CHARTEVENTS
+GROUP BY ITEMID
+HAVING COUNT(DISTINCT HADM_ID) > 10000
+INTO OUTFILE '/home/kelon/code/CVD/mimicdata/features.csv';
+
++--------+-------------------+
+| ITEMID | unique_hadm_count |
++--------+-------------------+
+|     27 |             27117 |
+|     31 |             33892 |
+|     32 |             26838 |
+|     39 |             14205 |
+|     40 |             14726 |
+|     49 |             20886 |
+|     50 |             10401 |
+|     51 |             17074 |
+|     52 |             17018 |
+|     54 |             26890 |
+|     69 |             27205 |
+|     72 |             20679 |
+|     77 |             25248 |
+|     80 |             31087 |
+|     82 |             26918 |
+|     83 |             26915 |
+|     84 |             26919 |
+|     85 |             26917 |
+|     86 |             26917 |
+|     87 |             26908 |
+|     88 |             26915 |
+|    113 |             12164 |
+|    127 |             15610 |
+|    128 |             26248 |
+|    131 |             13941 |
+|    154 |             23541 |
+|    156 |             26427 |
+|    157 |             13766 |
+|    159 |             26925 |
+|    161 |             27210 |
+|    165 |             16955 |
+|    166 |             16475 |
+|    167 |             17744 |
+|    168 |             17426 |
+|    169 |             17585 |
+|    170 |             17192 |
+|    171 |             17866 |
+|    172 |             15472 |
+|    183 |             13082 |
+|    184 |             27188 |
+|    187 |             23790 |
+|    190 |             16161 |
+|    198 |             27178 |
+|    200 |             13376 |
+|    203 |             13236 |
+|    210 |             27083 |
+|    211 |             34902 |
+|    212 |             27224 |
+|    218 |             14711 |
+|    219 |             13782 |
+|    221 |             11990 |
+|    229 |             19919 |
+|    230 |             15621 |
+|    232 |             19699 |
+|    235 |             13891 |
+|    236 |             11341 |
+|    238 |             13725 |
+|    283 |             15436 |
+|    284 |             11459 |
+|    294 |             25908 |
+|    297 |             21536 |
+|    300 |             10780 |
+|    324 |             25733 |
+|    325 |             21274 |
+|    392 |             10581 |
+|    398 |             10743 |
+|    411 |             10776 |
+|    417 |             14105 |
+|    425 |             27151 |
+|    428 |             27151 |
+|    432 |             27196 |
+|    434 |             14725 |
+|    444 |             14674 |
+|    450 |             14752 |
+|    454 |             27182 |
+|    455 |             26459 |
+|    456 |             26428 |
+|    467 |             28090 |
+|    470 |             23195 |
+|    477 |             20486 |
+|    478 |             27155 |
+|    479 |             27165 |
+|    506 |             14777 |
+|    522 |             17962 |
+|    524 |             17522 |
+|    525 |             25748 |
+|    526 |             19820 |
+|    527 |             22007 |
+|    535 |             14078 |
+|    543 |             13511 |
+|    547 |             26456 |
+|    548 |             15589 |
+|    549 |             25754 |
+|    550 |             26079 |
+|    578 |             14043 |
+|    580 |             17209 |
+|    581 |             19409 |
+|    582 |             20691 |
+|    584 |             14508 |
+|    585 |             14663 |
+|    593 |             27149 |
+|    599 |             27150 |
+|    604 |             17046 |
+|    605 |             15426 |
+|    610 |             15138 |
+|    614 |             14059 |
+|    615 |             14806 |
+|    617 |             27175 |
+|    618 |             27231 |
+|    619 |             14079 |
+|    621 |             23045 |
+|    622 |             15211 |
+|    623 |             15346 |
+|    631 |             14688 |
+|    637 |             26124 |
+|    640 |             19179 |
+|    642 |             21760 |
+|    644 |             27096 |
+|    646 |             27216 |
+|    656 |             13186 |
+|    657 |             13831 |
+|    660 |             16571 |
+|    663 |             25363 |
+|    674 |             27177 |
+|    677 |             26659 |
+|    678 |             26665 |
+|    680 |             19305 |
+|    682 |             14076 |
+|    683 |             14016 |
+|    684 |             12567 |
+|    704 |             27068 |
+|    706 |             26618 |
+|    707 |             27114 |
+|    720 |             14781 |
+|    722 |             14754 |
+|    723 |             27186 |
+|    732 |             13866 |
+|    733 |             14246 |
+|    742 |             27228 |
+|    762 |             27205 |
+|    763 |             19413 |
+|    769 |             12303 |
+|    770 |             12257 |
+|    772 |             11670 |
+|    773 |             11965 |
+|    776 |             17307 |
+|    777 |             17866 |
+|    778 |             17918 |
+|    779 |             17912 |
+|    780 |             18016 |
+|    781 |             27354 |
+|    784 |             13161 |
+|    786 |             24693 |
+|    787 |             27218 |
+|    788 |             27225 |
+|    791 |             27361 |
+|    796 |             10262 |
+|    797 |             10263 |
+|    798 |             10263 |
+|    799 |             10263 |
+|    800 |             10260 |
+|    807 |             19098 |
+|    811 |             27402 |
+|    813 |             27410 |
+|    814 |             27142 |
+|    815 |             24040 |
+|    816 |             14653 |
+|    818 |             13425 |
+|    821 |             26542 |
+|    824 |             23989 |
+|    825 |             23990 |
+|    827 |             24840 |
+|    828 |             27241 |
+|    829 |             27448 |
+|    833 |             27112 |
+|    834 |             17698 |
+|    837 |             27357 |
+|    848 |             11385 |
+|    861 |             27164 |
+|    916 |             27205 |
+|    917 |             27204 |
+|    919 |             27205 |
+|    920 |             27205 |
+|    924 |             27205 |
+|    925 |             27205 |
+|    926 |             35069 |
+|    927 |             27205 |
+|    930 |             27205 |
+|    935 |             27205 |
+|   1043 |             11407 |
+|   1044 |             17328 |
+|   1045 |             11605 |
+|   1046 |             26295 |
+|   1047 |             14863 |
+|   1087 |             23706 |
+|   1089 |             17509 |
+|   1125 |             24732 |
+|   1126 |             16944 |
+|   1127 |             25806 |
+|   1162 |             21108 |
+|   1286 |             18799 |
+|   1337 |             23929 |
+|   1425 |             20773 |
+|   1427 |             19848 |
+|   1479 |             10353 |
+|   1484 |             18441 |
+|   1522 |             19668 |
+|   1523 |             21078 |
+|   1525 |             21114 |
+|   1529 |             21147 |
+|   1530 |             18821 |
+|   1531 |             11162 |
+|   1532 |             20669 |
+|   1533 |             18942 |
+|   1534 |             20586 |
+|   1535 |             21167 |
+|   1536 |             21115 |
+|   1538 |             12348 |
+|   1542 |             21034 |
+|   1622 |             19913 |
+|   1623 |             19899 |
+|   5815 |             17386 |
+|   5817 |             15963 |
+|   5819 |             17179 |
+|   5820 |             17349 |
+|   8367 |             17868 |
+|   8368 |             16136 |
+|   8381 |             26357 |
+|   8382 |             13445 |
+|   8388 |             13285 |
+|   8390 |             12201 |
+|   8392 |             19761 |
+|   8393 |             13687 |
+|   8400 |             25406 |
+|   8401 |             21099 |
+|   8402 |             10112 |
+|   8428 |             10053 |
+|   8441 |             26411 |
+|   8454 |             12106 |
+|   8456 |             25653 |
+|   8466 |             14388 |
+|   8467 |             14520 |
+|   8476 |             13061 |
+|   8477 |             13742 |
+|   8480 |             26449 |
+|   8549 |             17384 |
+|   8551 |             15895 |
+|   8553 |             17156 |
+|   8554 |             17330 |
+| 220045 |             21924 |
+| 220046 |             21875 |
+| 220047 |             21878 |
+| 220048 |             21828 |
+| 220179 |             21685 |
+| 220180 |             21685 |
+| 220181 |             21676 |
+| 220210 |             21913 |
+| 220224 |             13135 |
+| 220228 |             23983 |
+| 220235 |             13135 |
+| 220277 |             21904 |
+| 220292 |             10129 |
+| 220293 |             10136 |
+| 220339 |             10189 |
+| 220545 |             24034 |
+| 220546 |             23983 |
+| 220587 |             11482 |
+| 220602 |             24062 |
+| 220615 |             24063 |
+| 220621 |             23990 |
+| 220635 |             23446 |
+| 220644 |             11494 |
+| 220645 |             24052 |
+| 220734 |             10147 |
+| 220739 |             21873 |
+| 223751 |             20982 |
+| 223752 |             20983 |
+| 223758 |             14305 |
+| 223761 |             21673 |
+| 223769 |             21866 |
+| 223770 |             21873 |
+| 223780 |             13347 |
+| 223781 |             21843 |
+| 223782 |             20178 |
+| 223783 |             21325 |
+| 223784 |             17189 |
+| 223791 |             20309 |
+| 223792 |             19560 |
+| 223794 |             20609 |
+| 223795 |             21763 |
+| 223796 |             15733 |
+| 223830 |             13211 |
+| 223834 |             17644 |
+| 223835 |             12143 |
+| 223848 |             10100 |
+| 223849 |             10222 |
+| 223873 |             10132 |
+| 223874 |             10062 |
+| 223876 |             10130 |
+| 223898 |             19214 |
+| 223900 |             21870 |
+| 223901 |             21867 |
+| 223902 |             19158 |
+| 223904 |             19294 |
+| 223905 |             19270 |
+| 223907 |             18315 |
+| 223911 |             19009 |
+| 223916 |             18833 |
+| 223917 |             17627 |
+| 223918 |             17616 |
+| 223919 |             17622 |
+| 223920 |             17607 |
+| 223934 |             21478 |
+| 223935 |             20529 |
+| 223936 |             13217 |
+| 223943 |             21476 |
+| 223947 |             20507 |
+| 223948 |             13016 |
+| 223951 |             15308 |
+| 223976 |             16014 |
+| 223979 |             16281 |
+| 223982 |             15968 |
+| 223983 |             16238 |
+| 223985 |             21806 |
+| 223986 |             21847 |
+| 223987 |             21845 |
+| 223988 |             21847 |
+| 223989 |             21843 |
+| 223990 |             21751 |
+| 223991 |             20777 |
+| 223992 |             18391 |
+| 223999 |             21789 |
+| 224000 |             17661 |
+| 224001 |             21635 |
+| 224003 |             21826 |
+| 224004 |             21790 |
+| 224005 |             14473 |
+| 224015 |             21591 |
+| 224016 |             21049 |
+| 224017 |             11824 |
+| 224023 |             20378 |
+| 224024 |             18422 |
+| 224026 |             21820 |
+| 224027 |             21806 |
+| 224028 |             21781 |
+| 224031 |             21555 |
+| 224032 |             12188 |
+| 224038 |             10340 |
+| 224054 |             21810 |
+| 224055 |             21808 |
+| 224056 |             21808 |
+| 224057 |             21810 |
+| 224058 |             21806 |
+| 224059 |             21807 |
+| 224072 |             20785 |
+| 224073 |             20766 |
+| 224075 |             20692 |
+| 224076 |             20753 |
+| 224077 |             20750 |
+| 224079 |             20730 |
+| 224080 |             21841 |
+| 224082 |             21833 |
+| 224084 |             21843 |
+| 224085 |             14224 |
+| 224086 |             21789 |
+| 224087 |             21159 |
+| 224088 |             15901 |
+| 224089 |             17926 |
+| 224093 |             21571 |
+| 224161 |             21864 |
+| 224162 |             21864 |
+| 224168 |             21858 |
+| 224308 |             15234 |
+| 224373 |             10262 |
+| 224409 |             17523 |
+| 224561 |             11720 |
+| 224639 |             11496 |
+| 224640 |             15751 |
+| 224641 |             21881 |
+| 224642 |             21837 |
+| 224650 |             21461 |
+| 224651 |             13891 |
+| 224685 |             10118 |
+| 224687 |             10149 |
+| 224689 |             10022 |
+| 224695 |             10078 |
+| 224697 |             10131 |
+| 224730 |             10852 |
+| 224731 |             10663 |
+| 224733 |             18298 |
+| 224756 |             18756 |
+| 224767 |             16202 |
+| 224769 |             16165 |
+| 224771 |             16489 |
+| 224773 |             16444 |
+| 224828 |             13134 |
+| 224860 |             21803 |
+| 224862 |             16753 |
+| 224865 |             10001 |
+| 224876 |             20957 |
+| 224879 |             17550 |
+| 225054 |             15892 |
+| 225059 |             11720 |
+| 225067 |             11940 |
+| 225072 |             16336 |
+| 225074 |             11066 |
+| 225078 |             10874 |
+| 225087 |             12850 |
+| 225092 |             15074 |
+| 225094 |             14498 |
+| 225097 |             14112 |
+| 225099 |             14352 |
+| 225101 |             11602 |
+| 225103 |             18081 |
+| 225106 |             13136 |
+| 225110 |             11573 |
+| 225113 |             12476 |
+| 225118 |             13181 |
+| 225120 |             12408 |
+| 225122 |             11454 |
+| 225124 |             11060 |
+| 225126 |             12486 |
+| 225137 |             11812 |
+| 225184 |             15568 |
+| 225185 |             17472 |
+| 225187 |             17495 |
+| 225231 |             14704 |
+| 225234 |             12612 |
+| 225313 |             14230 |
+| 225612 |             11303 |
+| 225624 |             24062 |
+| 225625 |             22631 |
+| 225634 |             10160 |
+| 225639 |             10193 |
+| 225640 |             10193 |
+| 225641 |             10193 |
+| 225642 |             10193 |
+| 225643 |             10193 |
+| 225664 |             16937 |
+| 225667 |             10821 |
+| 225668 |             13766 |
+| 225677 |             22617 |
+| 225690 |             11452 |
+| 225698 |             13132 |
+| 225811 |             13418 |
+| 226104 |             19205 |
+| 226137 |             12711 |
+| 226138 |             14808 |
+| 226168 |             19339 |
+| 226179 |             12540 |
+| 226180 |             10027 |
+| 226228 |             24549 |
+| 226253 |             21733 |
+| 226381 |             22683 |
+| 226512 |             21920 |
+| 226531 |             18645 |
+| 226543 |             24546 |
+| 226544 |             23108 |
+| 226545 |             24074 |
+| 226707 |             11811 |
+| 226730 |             11811 |
+| 226732 |             21687 |
+| 227073 |             24004 |
+| 227088 |             14001 |
+| 227121 |             18276 |
+| 227240 |             20942 |
+| 227288 |             18260 |
+| 227341 |             21684 |
+| 227342 |             21703 |
+| 227343 |             21710 |
+| 227344 |             21711 |
+| 227345 |             21711 |
+| 227346 |             21701 |
+| 227349 |             12936 |
+| 227367 |             12804 |
+| 227368 |             14897 |
+| 227375 |             13535 |
+| 227378 |             24547 |
+| 227442 |             24039 |
+| 227443 |             24056 |
+| 227457 |             23984 |
+| 227465 |             20787 |
+| 227466 |             20645 |
+| 227467 |             20787 |
+| 227687 |             11891 |
+| 227688 |             20200 |
+| 227944 |             17799 |
+| 227968 |             14713 |
+| 227969 |             17770 |
+| 228096 |             13425 |
++--------+-------------------+
+
