@@ -1,0 +1,98 @@
+# Default parameters of multi-modal model
+
+# basic setting
+is_training: 1
+train_only: False
+n_splits: 1
+use_gpu: True
+gpu: 0
+use_multi_gpu: False
+devices: '0,1,2,3'
+flag: 'train'
+# 'Cvd', 'Death', 'LoS'
+n_classes: 99
+predictive_label: 'ICD'
+multi: True
+# 'multi-class', 'multi-label'
+task: 'multi-label'
+root_path: '../Multi_data/P18_ECER/'
+
+# optimization
+num_workers: 10
+train_epochs: 12
+batch_size: 32
+patience: 4
+learning_rate:
+  - 0.001
+  - 0.00005
+  - 0.001
+min_lr: 0.000005
+weight_decay: 0.02
+loss: 'mse'
+lradj: 'type1'
+use_amp: False
+checkpoints: './checkpoints/'
+scheduler: 'get_cosine_schedule_with_warmup'
+warmup_step: -1
+warmup_rate: 0.1
+
+language_backbone:
+  model_name: "Bio_ClinicalBERT"
+  category: 'ECER'
+  label_path: 'df_outcomes.csv'
+  split_path: ''
+  aggre_layers: 1
+  docu_len: 150
+  seq_len: 100
+  bert_dim: 768
+  use_aggre: True
+  dropout: 0.2
+  num_layers: 4
+  num_heads: 4
+  mlp_ratio: 4
+
+
+ts_backbone:
+  model_name: "Raindrop_v4"
+  label_path: 'df_outcomes.csv'
+  PTdict_path: 'PTdict_list.npy'
+  category: 'P18'
+  split_path: ''
+  d_inp: 18
+  d_ob: 8
+  d_pe: 16
+  d_model: 144
+  nhead: 4
+  nhid: 128
+  nlayers: 3
+  dropout: 0.3
+  max_len: 500
+  d_static: 10
+  MAX: 100
+  aggreg: 'mean'
+  static: 1
+  sensor_wise_mask: True
+
+
+tetra:
+  hidden_size: 768
+  num_layers: 4
+  num_heads: 12
+  mlp_ratio: 4
+  docu_len: 150
+  drop_rate: 0.2
+  num_top_layer: 4
+  split_path: ''
+  # part, global, global mode needs much more gpu memory
+  mode: 'part'
+  # single, double, concat
+  structure: 'single'
+  itc: False
+  text_weights:
+    - 'Bio_Discharge_Summary_BERT_Discharge_summary_fold1_layers_4_lr_5e-05_dim_768_dropout_0.2_aggre_True'
+    - 'multi-label_Bio_ClinicalBERT_ECER_fold1_layers_4_lr_5e-05_dim_768_dropout_0.2_aggre_True'
+  ts_weights: 
+    - 'Raindrop_v4_P18_fold1_params_18_lr_0.001_nlayers_3_heads_4_dropout_0.3'
+    - 'multi-label_Raindrop_v4_P18_fold1_params_18_lr_0.001_nlayers_3_heads_4_dropout_0.3'
+
+

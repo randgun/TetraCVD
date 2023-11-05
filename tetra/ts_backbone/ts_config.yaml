@@ -1,0 +1,60 @@
+# Default parameters of multi modal model
+
+# basic setting
+is_training: 0
+train_only: False
+n_splits: 1
+use_gpu: True
+gpu: 0
+use_multi_gpu: False
+devices: '0,1,2,3'
+flag: 'train'
+# 'Cvd', 'Death', 'LoS'
+n_classes: 2
+predictive_label: 'Cvd'
+multi: False
+# 'multi-class', 'multi-label'
+task: 'multi-class'
+root_path: '../../Multi_data/P18_Discharge_summary/'
+
+# optimization
+num_workers: 10
+train_epochs: 12
+batch_size: 32
+patience: 3
+learning_rate:
+  - 0.001
+  - 0.00005
+min_lr: 0.000005
+weight_decay: 0.02
+loss: 'mse'
+lradj: 'type1'
+use_amp: False
+checkpoints: './checkpoints/'
+scheduler: 'get_linear_schedule_with_warmup'
+warmup_step: -1
+warmup_rate: 0.1
+
+ts_backbone:
+  model_name: "GNN-base"
+  label_path: 'df_outcomes.csv'
+  PTdict_path: 'PTdict_list.npy'
+  category: 'P18'
+  split_path: ''
+  d_inp: 18
+  d_ob: 4
+  d_pe: 16
+  d_model: 72
+  nhead: 4
+  nhid: 128
+  nlayers: 2
+  dropout: 0.3
+  max_len: 500
+  d_static: 10
+  MAX: 100
+  aggreg: 'mean'
+  static: 1
+  sensor_wise_mask: True
+
+
+

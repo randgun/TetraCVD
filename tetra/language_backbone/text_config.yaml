@@ -1,0 +1,55 @@
+# Default parameters of multi modal model
+
+# basic setting
+is_training: 1
+train_only: False
+n_splits: 1
+use_gpu: True
+gpu: 0
+use_multi_gpu: False
+devices: '0,1,2,3'
+flag: 'train'
+# 'Cvd', 'Death', 'LoS'
+n_classes: 99
+predictive_label: 'ICD'
+multi: False
+# 'multi-class', 'multi-label'
+task: 'multi-label'
+root_path: '../../Multi_data/P18_ECER/'
+
+# optimization
+num_workers: 10
+train_epochs: 10
+batch_size: 32
+patience: 3
+learning_rate:
+  - 0.001
+  - 0.00005
+min_lr: 0.000005
+weight_decay: 0.02
+loss: 'mse'
+lradj: 'type1'
+use_amp: False
+checkpoints: './checkpoints/'
+scheduler: 'get_cosine_schedule_with_warmup'
+warmup_step: -1
+warmup_rate: 0.1
+
+language_backbone:
+  model_name: "Bio_ClinicalBERT"
+  category: 'ECER'
+  label_path: 'df_outcomes.csv'
+  split_path: ''
+  aggre_layers: 1
+  docu_len: 150
+  seq_len: 100
+  bert_dim: 768
+  use_aggre: True
+  dropout: 0.2
+  num_layers: 4
+  num_heads: 4
+  mlp_ratio: 4
+
+
+
+
